@@ -3,11 +3,16 @@
 # Editor
 .vscode/
 .idea/
-# Node (TWA/Capacitor 빌드 시 생성)
+# Node
 node_modules/
+package-lock.json
+# Build output
 dist/
-# Android 빌드 산출물
-android/app/build/
+www/
+# Capacitor native project (CI 에서 `cap add android` 로 생성)
+android/
+ios/
+# Android build artifacts
 *.apk
 *.aab
 *.keystore

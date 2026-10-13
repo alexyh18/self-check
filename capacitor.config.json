@@ -1,0 +1,11 @@
+{
+  "appId": "com.scalpcheck.app",
+  "appName": "정수리 체크",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

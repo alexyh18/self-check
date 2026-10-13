@@ -37,14 +37,30 @@ npx serve scalp-check
 - **가장 빠른 방법 (빌드 불필요):** HTTPS로 호스팅한 뒤 안드로이드 **Chrome**에서 열고
   **⋮ → "앱 설치"** (또는 앱 내 "⬇️ 홈 화면에 앱 설치" 버튼) → 홈 아이콘으로
   전체화면 실행, **오프라인 동작**, 카메라/사진 선택 그대로 지원.
-- **Play 스토어용 APK/AAB:** `android/twa-manifest.json` + Bubblewrap(TWA)로 패키징.
-- **네이티브 래핑:** Capacitor로 APK 빌드.
+- **APK 자동 빌드 (추천):** GitHub Actions가 클라우드에서 APK를 빌드합니다.
+  → [Actions 탭](../../actions)에서 `Android APK` 워크플로 실행 후 Artifact로 다운로드.
+- **Play 스토어용 APK/AAB:** `docs/twa-manifest.json` + Bubblewrap(TWA)로 패키징.
+- **네이티브 래핑:** Capacitor로 APK 빌드 (로컬).
 
-👉 상세 단계는 **[`android/README-android.md`](./android/README-android.md)** 참고.
+👉 로컬 빌드/TWA 상세 단계는 **[`docs/android-build.md`](./docs/android-build.md)** 참고.
 
-> ℹ️ APK 빌드(TWA/Capacitor)는 인터넷 + Android SDK/JDK가 필요합니다.
-> 현재 개발 샌드박스는 외부 네트워크가 차단되어 있어, 여기서는 **PWA까지** 완성해 두었고
-> APK 빌드는 네트워크가 열린 PC에서 가이드대로 진행하면 됩니다.
+### ⚡ APK 자동 빌드 (GitHub Actions)
+
+PC에 아무것도 설치하지 않고 **GitHub 클라우드에서 APK를 빌드**할 수 있습니다.
+
+1. GitHub 리포의 **Actions** 탭 열기
+2. 왼쪽에서 **`Android APK`** 워크플로 선택 → **Run workflow** 클릭
+   (`main`에 push 하면 자동으로도 실행됩니다)
+3. 빌드 완료 후, 실행 결과 페이지 하단 **Artifacts** 에서
+   **`scalp-check-debug-apk`** 다운로드 → 압축 풀면 `scalp-check-debug.apk`
+4. APK를 안드로이드 폰에 복사 후 설치 (출처를 알 수 없는 앱 설치 허용 필요)
+
+> 빌드 과정: `npm install` → 웹 자산을 `www/`로 복사 → `cap add android`(Capacitor가
+> 네이티브 프로젝트 생성) → Gradle `assembleDebug` → **디버그 APK** 산출.
+> 워크플로 정의: [`.github/workflows/android.yml`](./.github/workflows/android.yml)
+>
+> 생성되는 것은 **디버그 서명 APK**(테스트/사이드로드용)입니다. Play 스토어 배포용
+> 릴리스 서명 AAB가 필요하면 `docs/android-build.md`의 TWA/서명 섹션을 따르세요.
 
 ## 분석 로직 요약 (`analysis.js`)
 
