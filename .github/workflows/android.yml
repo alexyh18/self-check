@@ -32,6 +32,15 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          # v3 기본값이 레거시 'tools' 패키지를 설치하려다 실패하므로 비활성화.
+          # 필요한 platform/build-tools 는 Gradle(AGP)이 자동으로 받습니다.
+          packages: ''
+
+      - name: Install Android SDK packages
+        run: |
+          yes | sdkmanager --licenses >/dev/null 2>&1 || true
+          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Install dependencies
         run: npm install
