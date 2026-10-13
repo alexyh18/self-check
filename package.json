@@ -1,0 +1,19 @@
+{
+  "name": "scalp-check",
+  "version": "1.0.0",
+  "private": true,
+  "description": "정수리 사진으로 두피 노출도를 측정하는 PWA/안드로이드 셀프 체크 앱",
+  "type": "module",
+  "scripts": {
+    "copy:web": "node scripts/copy-web.mjs",
+    "cap:sync": "npm run copy:web && cap sync android",
+    "cap:add:android": "cap add android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  }
+}
