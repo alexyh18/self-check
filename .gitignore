@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+# Editor
+.vscode/
+.idea/
+# Node (TWA/Capacitor 빌드 시 생성)
+node_modules/
+dist/
+# Android 빌드 산출물
+android/app/build/
+*.apk
+*.aab
+*.keystore
